@@ -2,7 +2,7 @@
 # Scrape emails and parse for different form types. 
 
 from email_retriever import EmailRetriever
-from mysecrets import EMAIL, PASSWORD, EMAIL2, PASSWORD2
+from mysecrets import EMAIL, PASSWORD, EMAIL2, PASSWORD2, MANAGER_EMAILS
 
 class BasicEmailObject:
     def __init__(self, email):
@@ -71,10 +71,8 @@ email_summary = "\n".join([
     f"To view the job applications, audit requests, and employee feedback, please check the info@crystalclearBuildingServices.com or ContactUs@cleanmybuilding.co"
 ]).replace("\n", "<br>")
 
-
 from simpleEmailSender import SimpleEmailSender
-SimpleEmailSender("Email Summary", email_summary, 'smlesko@ccbs1.com').send_email()
-SimpleEmailSender("Email Summary", email_summary, 'dan@ccbs1.com').send_email()
-SimpleEmailSender("Email Summary", email_summary, 'joe@ccbs1.com').send_email()
-print("Emails sent!")
+for manager in MANAGER_EMAILS: 
+    SimpleEmailSender("Email Summary", email_summary, manager).send_email()
 
+print("Emails sent!")
